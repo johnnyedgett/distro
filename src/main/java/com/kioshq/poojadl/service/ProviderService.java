@@ -1,5 +1,7 @@
 package com.kioshq.poojadl.service;
 
-public interface ProviderService {
+import com.kioshq.poojadl.entity.Provider;
 
+public interface ProviderService {
+	public Provider registerProvider(Provider provider);
 }
