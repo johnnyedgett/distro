@@ -1,5 +1,6 @@
 package com.kioshq.poojadl.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,10 @@ public class DistributionListServiceImpl implements DistributionListService {
 
 	@Override
 	public List<DistributionList> getAllDistributionLists() {
-		// TODO Auto-generated method stub
-		return null;
+		List<DistributionList> dlList = new ArrayList<>();
+		Iterable<DistributionList> dlIterable = dlRepository.findAll();
+		dlIterable.forEach(dlList::add);
+		return dlList;
 	}
 
 }
