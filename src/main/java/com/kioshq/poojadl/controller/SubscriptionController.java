@@ -1,9 +1,15 @@
 package com.kioshq.poojadl.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kioshq.poojadl.dto.SubscriptionTemplate;
+import com.kioshq.poojadl.entity.Subscription;
 import com.kioshq.poojadl.service.DistributionListService;
 import com.kioshq.poojadl.service.SubscriptionService;
 
@@ -19,6 +25,11 @@ public class SubscriptionController {
 	@Autowired
 	DistributionListService dlService;
 
+	@PostMapping("/create")
+	public ResponseEntity<Subscription> createSubscription(@RequestBody SubscriptionTemplate template) {
+		Subscription subscription = subscriptionService.createNewSubscription(template);
+		return new ResponseEntity<>(subscription, HttpStatus.OK);
+	}
 //	@PostMapping("/create")
 //	public ResponseEntity<DistributionListSubscriberMap> createSubscription(@RequestBody SubscriptionTemplate subscription,
 //			@RequestParam(name = "poojadl", required = true) Long poojaDlId) {

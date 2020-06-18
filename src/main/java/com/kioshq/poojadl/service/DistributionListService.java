@@ -7,7 +7,9 @@ import com.kioshq.poojadl.entity.DistributionList;
 
 public interface DistributionListService {
 	DistributionList createNewDistributionList(DistributionListTemplate dlTemplate);
+
 	DistributionList findDistributionList(Long listId);
+
 	List<DistributionList> getAllDistributionLists();
-	
+
 }

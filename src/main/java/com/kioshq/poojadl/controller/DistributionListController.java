@@ -16,7 +16,7 @@ import com.kioshq.poojadl.entity.DistributionList;
 import com.kioshq.poojadl.service.DistributionListService;
 
 @RestController
-@RequestMapping("/api/poojadl")
+@RequestMapping("/api/distributionlist")
 public class DistributionListController {
 	@Autowired
 	DistributionListService dlService;

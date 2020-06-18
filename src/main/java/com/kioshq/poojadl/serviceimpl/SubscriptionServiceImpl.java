@@ -15,7 +15,7 @@ import com.kioshq.poojadl.service.DistributionListService;
 import com.kioshq.poojadl.service.SubscriptionService;
 
 @Service
-public class SupbscriptionServiceImpl implements SubscriptionService {
+public class SubscriptionServiceImpl implements SubscriptionService {
 	private static final Logger LOG = LoggerFactory.getLogger(SubscriptionService.class);
 
 	@Autowired
@@ -46,6 +46,7 @@ public class SupbscriptionServiceImpl implements SubscriptionService {
 		if (subscriptionExists)
 			// TODO do some exception
 			LOG.error("PANIC");
+		
 //		public Subscription(User user, DistributionList distributionList, SubscriptionType subscriptionType) {
 		Subscription newSubscription = new Subscription(user, distributionList, subscription.getSubscriptionType());
 		return subscriptionRepository.save(newSubscription);

@@ -18,24 +18,24 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	@Autowired
 	OrganizationRepository organizationRepository;
-	
+
 	@Autowired
 	AuthenticationService authService;
-	
+
 	@Override
 	public Organization createNewOrganization(OrganizationTemplate organization) {
 		User user = authService.findUser(organization.getOwnerId());
-		
+
 		List<User> userList = new ArrayList<>();
 		userList.add(user);
-		
+
 		Organization newOrg = new Organization(organization.getName(), userList);
 		return organizationRepository.save(newOrg);
 	}
-	
+
 	public Organization getOrganizationById(Long id) {
 		Organization organization = organizationRepository.findById(id).get();
-		
+
 		return organization;
 	}
 

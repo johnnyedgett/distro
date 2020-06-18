@@ -3,17 +3,17 @@ package com.kioshq.poojadl.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -23,6 +23,8 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
+	@JsonIgnore
 	private Long id;
 
 	private String email;
@@ -35,16 +37,8 @@ public class User {
 	@JsonManagedReference(value = "user-subscriptions")
 	private List<Subscription> subscriptions;
 
-    @ManyToMany
-    @JoinTable(name = "user_organization",
-               joinColumns = {
-                   @JoinColumn(name = "user_id")
-               },
-               inverseJoinColumns = {
-                   @JoinColumn(name = "organization_id")
-               }
-    )
-	@JsonBackReference(value = "user-organizations")
+    @ManyToMany(mappedBy = "users")
+	@JsonManagedReference(value = "user-organizations")
 	private List<Organization> organizations;
 
 	public String getEmail() {

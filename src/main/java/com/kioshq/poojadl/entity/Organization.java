@@ -4,31 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Organization {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "organization_id")
 	private Long id;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_id")
-	@JsonManagedReference(value = "user-distributionlists")
+	@JsonBackReference(value = "user-distributionlists")
 	private List<DistributionList> distributionLists;
 
-	@ManyToMany(mappedBy = "organizations")
-	@JsonManagedReference(value = "user-organizations")
+	@ManyToMany
+	@JoinTable(name = "user_organization", joinColumns = {
+			@JoinColumn(name = "organization_id") }, inverseJoinColumns = { @JoinColumn(name = "user_id") })
+	@JsonBackReference(value = "user-organizations")
 	private List<User> users;
 
 	private String providerName;
@@ -61,8 +66,9 @@ public class Organization {
 		this.users = users;
 	}
 
-	public Organization() {}
-	
+	public Organization() {
+	}
+
 	public Organization(String name, List<User> users) {
 		this.providerName = name;
 		this.users = users;

@@ -1,9 +1,11 @@
 package com.kioshq.poojadl.entity;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,6 +23,7 @@ public class DistributionList {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "distribution_list_id")
 	private Long id;
 
 	private String listName;
@@ -31,15 +34,13 @@ public class DistributionList {
 	private List<Subscription> subscriptions;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "subscription_id")
+	@JoinColumn(name = "organization_id")
 	@JsonBackReference(value = "user-distributionlists")
 	private Organization organization;
-	
+
+	// TODO: Flesh this out more
 	@ElementCollection(targetClass = String.class)
 	private Set<String> categories;
-
-	public DistributionList() {
-	}
 
 	public Long getId() {
 		return id;
@@ -75,5 +76,14 @@ public class DistributionList {
 
 	public void setOrganization(Organization organization) {
 		this.organization = organization;
+	}
+
+	public DistributionList() {
+	}
+
+	public DistributionList(String listName, Organization organization) {
+		this.listName = listName;
+		this.organization = organization;
+		this.categories = new HashSet<String>();
 	}
 }

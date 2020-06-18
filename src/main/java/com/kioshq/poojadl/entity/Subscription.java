@@ -21,7 +21,7 @@ public class Subscription {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "subscriber_id")
+	@JoinColumn(name = "user_id")
 	@JsonBackReference(value = "user-subscriptions")
 	private User user;
 

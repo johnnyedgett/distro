@@ -7,8 +7,8 @@ public interface AuthenticationService {
 	User registerNewUser(UserTemplate user);
 
 	User loginUser(UserTemplate user);
-	
+
 	User findUser(Long userId);
-	
+
 	boolean validateUser(UserTemplate user);
 }

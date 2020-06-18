@@ -23,7 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Override
 	public User registerNewUser(UserTemplate newUser) {
 		validateUser(newUser); // TODO
-		
+
 		User user = new User();
 		user.setEmail(newUser.getEmail());
 		user.setPassword(passwordEncoder.encode(newUser.getPassword()));
