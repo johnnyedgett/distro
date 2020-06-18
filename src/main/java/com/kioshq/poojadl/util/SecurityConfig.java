@@ -15,23 +15,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.headers().frameOptions().sameOrigin();
-		http
-			.csrf()
-				.disable()
-			.authorizeRequests()
-				.antMatchers("/actuator/env")
-					.permitAll()
-				.antMatchers("/api/**")
-					.permitAll()
-				.anyRequest()
-					.permitAll();
+		http.csrf().disable().authorizeRequests().antMatchers("/actuator/env").permitAll().antMatchers("/api/**")
+				.permitAll().anyRequest().permitAll();
 //				.anyRequest()
 //					.authenticated();
 	}
-	/* TODO 
-	 * UsersDetailservice, SessionAuthenticationFilter, Configure, AuthenticationManager
+	/*
+	 * TODO UsersDetailservice, SessionAuthenticationFilter, Configure,
+	 * AuthenticationManager
 	 */
 }

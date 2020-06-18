@@ -3,9 +3,9 @@ package com.kioshq.poojadl.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.kioshq.poojadl.entity.PoojaDL;
+import com.kioshq.poojadl.entity.Subscription;
 
 @Repository
-public interface PoojaDLRepository extends CrudRepository<PoojaDL, Long> {
+public interface SubscriptionRepository extends CrudRepository<Subscription, Long> {
 
 }
