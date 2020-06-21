@@ -22,10 +22,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public User registerNewUser(UserTemplate newUser) {
-		validateUser(newUser); // TODO
+		if (!validateUser(newUser))
+			throw new IllegalArgumentException("PH ERROR TODO");
 
 		User user = new User();
-		user.setEmail(newUser.getEmail());
+		user.setUsername(newUser.getUsername());
 		user.setPassword(passwordEncoder.encode(newUser.getPassword()));
 		user.setSubscriptions(new ArrayList<>());
 		user.setOrganizations(new ArrayList<>());
@@ -47,6 +48,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public boolean validateUser(UserTemplate user) {
-		return true;
+		return (authenticationRepository.findByUsername(user.getUsername()) == null);
 	}
 }

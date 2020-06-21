@@ -27,7 +27,7 @@ public class User {
 	@JsonIgnore
 	private Long id;
 
-	private String email;
+	private String username;
 
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
@@ -41,12 +41,16 @@ public class User {
 	@JsonManagedReference(value = "user-organizations")
 	private List<Organization> organizations;
 
-	public String getEmail() {
-		return email;
+    public Long getId() {
+    	return id;
+    }
+    
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
