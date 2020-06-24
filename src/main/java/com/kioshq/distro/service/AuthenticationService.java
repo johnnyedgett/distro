@@ -1,14 +1,14 @@
 package com.kioshq.distro.service;
 
-import com.kioshq.distro.dto.UserTemplate;
-import com.kioshq.distro.entity.User;
+import com.kioshq.distro.dto.PersonTemplate;
+import com.kioshq.distro.entity.Person;
 
 public interface AuthenticationService {
-	User registerNewUser(UserTemplate user);
+	Person registerNewPerson(PersonTemplate user);
 
-	User loginUser(UserTemplate user);
+	Person loginUser(PersonTemplate user);
 
-	User findUser(Long userId);
+	Person findUser(Long userId);
 
-	boolean validateUser(UserTemplate user);
+	boolean validateUser(PersonTemplate user);
 }

@@ -27,14 +27,14 @@ public class Organization {
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_id")
-	@JsonBackReference(value = "user-distributionlists")
+	@JsonBackReference(value = "person-distributionlists")
 	private List<DistributionList> distributionLists;
 
 	@ManyToMany
-	@JoinTable(name = "user_organization", joinColumns = {
-			@JoinColumn(name = "organization_id") }, inverseJoinColumns = { @JoinColumn(name = "user_id") })
-	@JsonBackReference(value = "user-organizations")
-	private List<User> users;
+	@JoinTable(name = "person_organization", joinColumns = {
+			@JoinColumn(name = "organization_id") }, inverseJoinColumns = { @JoinColumn(name = "person_id") })
+	@JsonBackReference(value = "person-organizations")
+	private List<Person> persons;
 
 	private String providerName;
 
@@ -58,20 +58,20 @@ public class Organization {
 		return id;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public List<Person> getPersons() {
+		return persons;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
 	}
 
 	public Organization() {
 	}
 
-	public Organization(String name, List<User> users) {
+	public Organization(String name, List<Person> persons) {
 		this.providerName = name;
-		this.users = users;
+		this.persons = persons;
 		this.distributionLists = new ArrayList<>();
 	}
 

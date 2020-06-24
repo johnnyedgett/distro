@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kioshq.distro.dto.UserTemplate;
-import com.kioshq.distro.entity.User;
+import com.kioshq.distro.dto.PersonTemplate;
+import com.kioshq.distro.entity.Person;
 import com.kioshq.distro.repository.AuthenticationRepository;
 import com.kioshq.distro.service.AuthenticationService;
 
@@ -21,33 +21,34 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	PasswordEncoder passwordEncoder;
 
 	@Override
-	public User registerNewUser(UserTemplate newUser) {
+	public Person registerNewPerson(PersonTemplate newUser) {
 		if (!validateUser(newUser))
 			throw new IllegalArgumentException("PH ERROR TODO");
 
-		User user = new User();
-		user.setUsername(newUser.getUsername());
-		user.setPassword(passwordEncoder.encode(newUser.getPassword()));
-		user.setSubscriptions(new ArrayList<>());
-		user.setOrganizations(new ArrayList<>());
+		Person person = new Person();
+		person.setUsername(newUser.getUsername());
+		person.setPassword(passwordEncoder.encode(newUser.getPassword()));
+		person.setSubscriptions(new ArrayList<>());
+		person.setOrganizations(new ArrayList<>());
 
 		// TODO check if this person exists etc.
-		return authenticationRepository.save(user);
+		return authenticationRepository.save(person);
 	}
 
 	@Override
-	public User loginUser(UserTemplate user) {
+	public Person loginUser(PersonTemplate person) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public User findUser(Long userId) {
-		return authenticationRepository.findById(userId).get();
+	public Person findUser(Long personId) {
+		return authenticationRepository.findById(personId).get();
 	}
 
 	@Override
-	public boolean validateUser(UserTemplate user) {
-		return (authenticationRepository.findByUsername(user.getUsername()) == null);
+	public boolean validateUser(PersonTemplate person) {
+		boolean personExists = authenticationRepository.findByUsername(person.getUsername()).isPresent();
+		return !personExists;
 	}
 }

@@ -19,11 +19,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-public class User {
+public class Person {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id")
+	@Column(name = "person_id")
 	@JsonIgnore
 	private Long id;
 
@@ -33,18 +33,18 @@ public class User {
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	@JsonManagedReference(value = "user-subscriptions")
+	@JoinColumn(name = "person_id")
+	@JsonManagedReference(value = "person-subscriptions")
 	private List<Subscription> subscriptions;
 
-    @ManyToMany(mappedBy = "users")
-	@JsonManagedReference(value = "user-organizations")
+	@ManyToMany(mappedBy = "persons")
+	@JsonManagedReference(value = "person-organizations")
 	private List<Organization> organizations;
 
-    public Long getId() {
-    	return id;
-    }
-    
+	public Long getId() {
+		return id;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -77,6 +77,6 @@ public class User {
 		this.organizations = organizations;
 	}
 
-	public User() {
+	public Person() {
 	}
 }

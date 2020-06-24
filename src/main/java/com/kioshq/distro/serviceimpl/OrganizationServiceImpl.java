@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kioshq.distro.dto.OrganizationTemplate;
 import com.kioshq.distro.entity.Organization;
-import com.kioshq.distro.entity.User;
+import com.kioshq.distro.entity.Person;
 import com.kioshq.distro.repository.OrganizationRepository;
 import com.kioshq.distro.service.AuthenticationService;
 import com.kioshq.distro.service.OrganizationService;
@@ -24,9 +24,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	@Override
 	public Organization createNewOrganization(OrganizationTemplate organization) {
-		User user = authService.findUser(organization.getOwnerId());
+		Person user = authService.findUser(organization.getOwnerId());
 
-		List<User> userList = new ArrayList<>();
+		List<Person> userList = new ArrayList<>();
 		userList.add(user);
 
 		Organization newOrg = new Organization(organization.getName(), userList);
@@ -41,7 +41,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
 	@Override
 	public List<Organization> getOrganizationsByUserId(Long userId) {
-		User user = authService.findUser(userId);
+		Person user = authService.findUser(userId);
 		return user.getOrganizations();
 	}
 

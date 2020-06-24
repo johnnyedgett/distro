@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.kioshq.distro.entity.User;
+import com.kioshq.distro.entity.Person;
 import com.kioshq.distro.repository.AuthenticationRepository;
 
 @Service
@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> u = authRepository.findByUsername(username);
+		Optional<Person> u = authRepository.findByUsername(username);
 		if (u.isPresent())
 			return UserPrincipal.create(u.get());
 		else

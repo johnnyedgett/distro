@@ -1,6 +1,7 @@
 package com.kioshq.distro.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,12 +19,13 @@ public class Subscription {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "subscription_id")
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	@JsonBackReference(value = "user-subscriptions")
-	private User user;
+	@JoinColumn(name = "person_id")
+	@JsonBackReference(value = "person-subscriptions")
+	private Person person;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "distribution_list_id")
@@ -44,12 +46,12 @@ public class Subscription {
 		return id;
 	}
 
-	public User getUser() {
-		return user;
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	public DistributionList getDistributionList() {
@@ -63,8 +65,8 @@ public class Subscription {
 	public Subscription() {
 	}
 
-	public Subscription(User user, DistributionList distributionList, SubscriptionType subscriptionType) {
-		this.user = user;
+	public Subscription(Person person, DistributionList distributionList, SubscriptionType subscriptionType) {
+		this.person = person;
 		this.distributionList = distributionList;
 		this.subscriptionType = subscriptionType;
 	}

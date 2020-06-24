@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kioshq.distro.dto.SubscriptionTemplate;
 import com.kioshq.distro.entity.DistributionList;
 import com.kioshq.distro.entity.Subscription;
-import com.kioshq.distro.entity.User;
+import com.kioshq.distro.entity.Person;
 import com.kioshq.distro.repository.SubscriptionRepository;
 import com.kioshq.distro.service.AuthenticationService;
 import com.kioshq.distro.service.DistributionListService;
@@ -32,7 +32,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		// check if the dl exists
 		// make sure the subscription is valid (ie not already subscribed)
 		DistributionList distributionList = dlService.findDistributionList(subscription.getListId());
-		User user = authService.findUser(subscription.getUserId());
+		Person user = authService.findUser(subscription.getUserId());
 
 		/* Validate the user and distribution list exist */
 		if (user == null || distributionList == null)

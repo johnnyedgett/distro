@@ -1,6 +1,6 @@
 package com.kioshq.distro.dto;
 
-public class UserTemplate {
+public class PersonTemplate {
 	private String username;
 	private String password;
 
